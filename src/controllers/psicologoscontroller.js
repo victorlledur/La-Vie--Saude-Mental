@@ -5,7 +5,7 @@ const Psicologos = require("../models/Psicologos");
 const psicologosController = {
      async listarPsicologos(req, res) {
         try {
-            const listarPsicologos = await Person.findAll();
+            const listarPsicologos = await Psicologos.findAll();
     
             res.json(listarPsicologos);            
         } catch (error) {
@@ -61,12 +61,12 @@ const psicologosController = {
                 },
                 {
                     where: {
-                    person_id: id,
+                    id,
                     }
                 }
             );
 
-            const person = await Person.findByPk(id);
+            const person = await Psicologos.findByPk(id);
 
             res.json(person)
         } catch (error) {
@@ -80,7 +80,7 @@ const psicologosController = {
 
             await Psicologos.destroy({
                 where:{
-                    person_id: id,
+                 id,
                 },
             });
 
