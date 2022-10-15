@@ -6,13 +6,17 @@ Atendimentos.hasOne(Psicologos, {
     foreignKey: "psicologos_id"
 });
 
-Psicologos.hasMany(Atendimentos);
+Psicologos.hasMany(Atendimentos, {
+    foreignKey: "psicologos_id"
+});
 
 Atendimentos.hasOne(Pacientes, {
     foreignKey: "pacientes_id"
 });
 
-Pacientes.hasMany(Atendimentos);
+Pacientes.hasMany(Atendimentos, {
+    foreignKey: "pacientes_id"
+});
 
 module.exports = {
     Atendimentos,
