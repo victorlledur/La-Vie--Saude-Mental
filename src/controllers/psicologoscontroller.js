@@ -31,6 +31,7 @@ const psicologosController = {
                 res.status(404).json("Id não encontrado")                                
             };
 
+            psicologo.senha = undefined
 
             res.status(200).json(psicologo)
         } catch (error) {
