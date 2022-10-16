@@ -3,7 +3,7 @@ const Psicologos = require("../models/Psicologos");
 
 
 const psicologosController = {
-     async listarPsicologos(req, res) {
+     async listPsicologos(req, res) {
         try {
             const listarPsicologos = await Psicologos.findAll();
     
@@ -28,7 +28,7 @@ const psicologosController = {
         }
      },
 
-     async criarPsicologo(req,res) {
+     async createPsicologo(req,res) {
         try {
             const { nome, email, senha, apresentacao } = req.body;
 
@@ -74,7 +74,7 @@ const psicologosController = {
         }
      },
 
-     async deletarPisicologo(req,res) {        
+     async deletePsicologo(req,res) {        
         try {
             const {id} = await req.params;
 
