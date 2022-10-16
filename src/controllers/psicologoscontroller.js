@@ -53,6 +53,7 @@ const psicologosController = {
         try {
             const { id } = req.params;
             const { nome, email, senha, apresentação } = req.body;
+            
 
             await Psicologos.update(
                 {
