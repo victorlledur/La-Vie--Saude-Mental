@@ -11,7 +11,7 @@ routes.get("/psicologos", psicologosController.listPsicologos);
 routes.get("/psicologo/:id", psicologosController.onePsicologo);
 routes.post("/psicologo/criar", psicologosController.createPsicologo);
 routes.put("/psicologo/:id", psicologosController.updatePsicologo);
-routes.delete("/psicologo/:id/deletar", psicologosController.deletePsicologo);
+routes.delete("/psicologo/:id", psicologosController.deletePsicologo);
 
 routes.get("/atendimentos", atendimentosController.listarAtendimentos);
 routes.get("/atendimentos/:id", atendimentosController.ByIdAtendimentos);

@@ -1,4 +1,4 @@
-const Psicologos = require("../models/Psicologos");
+const { Psicologos } = require("../models");
 const bcrypt = require("bcryptjs");
 
 
@@ -17,16 +17,26 @@ const psicologosController = {
 
      async onePsicologo(req, res) {
         try {
+
             const {id} = req.params;
-            
-            const psicologo = await Psicologos.findByPk(id);
-           
-            
-            res.json(psicologo);
-           
+                      
+            const psicologo = await Psicologos.findOne({
+                where: {
+                    id,
+                }
+            });
+
+
+            if (!psicologo) {
+                res.status(404).json("Id não encontrado")                                
+            };
+
+
+            res.status(200).json(psicologo)
         } catch (error) {
             console.log(error)
-        }
+        }              
+        
      },
 
      async createPsicologo(req,res) {
@@ -53,13 +63,14 @@ const psicologosController = {
         try {
             const { id } = req.params;
             const { nome, email, senha, apresentação } = req.body;
+            const newSenha = bcrypt.hashSync(senha, 10);
             
 
             await Psicologos.update(
                 {
                     nome,
                     email,
-                    senha,
+                    senha: newSenha,
                     apresentação,
 
                 },
@@ -70,9 +81,9 @@ const psicologosController = {
                 }
             );
 
-            const person = await Psicologos.findByPk(id);
+            const psicologo = await Psicologos.findByPk(id);
 
-            res.json(person)
+            res.json(psicologo)
         } catch (error) {
             
         }
@@ -82,14 +93,25 @@ const psicologosController = {
         try {
             const {id} = await req.params;
 
+            const psicologo = await Psicologos.findOne({
+                where: {
+                    id,
+                }
+            });
+
+            if (!psicologo) {
+                res.status(404).json("Id não encontrado")                                
+            };
+
             await Psicologos.destroy({
                 where:{
                  id,
                 },
             });
 
-            res.json("Apagado com sucesso");
+            
             res.sendStatus(204)
+            
         } catch (error) {
             console.log(error)          
         }
