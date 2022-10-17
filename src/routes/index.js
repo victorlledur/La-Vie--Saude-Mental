@@ -1,4 +1,5 @@
 const express = require("express");
+const pacientesController = require ("../controllers/pacientesController");
 const psicologosController = require("../controllers/psicologosController");
 const atendimentosController = require("../controllers/atendimentosController");
 const loginValidation = require("../validations/login/login");
@@ -16,5 +17,12 @@ routes.delete("/psicologo/:id", psicologosController.deletePsicologo);
 routes.get("/atendimentos", atendimentosController.listarAtendimentos);
 routes.get("/atendimentos/:id", atendimentosController.ByIdAtendimentos);
 routes.post("/atedimento/criar",atendimentosController.criarAtendimento);
+
+routes.get("/pacientes", pacientesController.listPacientes);
+routes.get("/paciente/:id", pacientesController.onePaciente);
+routes.post("/paciente/criar", pacientesController.createPaciente);
+routes.put("/paciente/:id", pacientesController.updatePaciente);
+routes.delete("/paciente/:id", pacientesController.deletePaciente);
+
 
 module.exports = routes;

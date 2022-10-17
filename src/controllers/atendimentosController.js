@@ -41,7 +41,7 @@ const atendimentosController = {
 
             res.json(newatendimento)
         } catch (error) { 
-            consol.log(error)            
+            console.log(error)            
         }
      },
 }
