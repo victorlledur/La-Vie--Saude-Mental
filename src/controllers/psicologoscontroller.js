@@ -56,7 +56,7 @@ const psicologosController = {
 
            res.status(201).json(newPsicologo)
         } catch (error) { 
-            consol.log(error)            
+            console.log(error)            
         }
      },
 

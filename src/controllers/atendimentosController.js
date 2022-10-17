@@ -20,6 +20,10 @@ const atendimentosController = {
 
             const atendimento = await Atendimentos.findByPk(id);
 
+            if (!atendimento) {
+                res.status(404).json("Id não encontrado")                                
+            };
+
             res.json(atendimento);
             res.sendStatus(200);
         } catch (error) {
