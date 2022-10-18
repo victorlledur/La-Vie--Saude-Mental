@@ -2,6 +2,7 @@ const { Atendimentos, Psicologos, Pacientes } = require("../models");
 const jwt = require("jsonwebtoken");
 const secret = require("../configs/secret");
 const auth = require("../middlewares/auth")
+const ERRORS = require("../constants/errors")
 
 
 
@@ -21,10 +22,13 @@ const atendimentosController = {
         try {
             const { id } = req.params;
 
-            const atendimento = await Atendimentos.findByPk(id);
-
+            const atendimento = await Atendimentos.findOne({
+                where: {
+                    id,
+                }
+            });
             if (!atendimento) {
-                res.status(404).json("Id não encontrado")
+                res.status(404).json(ERRORS.ATENDIMENTOS.BYID)
             };
 
             res.status(200).json(atendimento);
