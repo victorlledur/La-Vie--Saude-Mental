@@ -1,5 +1,5 @@
 const Atendimentos = require("../models/Atendimentos");
-const authController = require("../controllers/authController");
+
 
 const atendimentosController = {
     async listarAtendimentos(req,res){
@@ -32,8 +32,8 @@ const atendimentosController = {
     },
     async criarAtendimento(req,res) {
         try {
-            const psicologo = authController.login();
-            const { pacientes_id, data_atendimento, observacao, psicologos_id } = req.body;
+            
+            const { data_atendimento, observacao,pacientes_id, psicologos_id } = req.body;
 
             const newatendimento = await Atendimentos.create({
                 data_atendimento,
@@ -42,6 +42,9 @@ const atendimentosController = {
                 pacientes_id,
 
             });
+            if(!newatendimento.psicologos_id){
+                res.status(400)
+            };
 
             res.json(newatendimento)
         } catch (error) { 

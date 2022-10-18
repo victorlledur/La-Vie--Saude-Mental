@@ -12,14 +12,17 @@ const Atendimentos = db.define(
     },    
     psicologos_id: {
         type: DataTypes.INTEGER,
+        
     },
     pacientes_id: {
         type: DataTypes.INTEGER,
+        
     },
 },
 {
     tableName: "atendimentos",
-    timestamps: false
-})
+    timestamps: false,
 
+})
+Atendimentos.removeAttribute('id');
 module.exports = Atendimentos;
