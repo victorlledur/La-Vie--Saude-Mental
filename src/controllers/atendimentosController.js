@@ -4,7 +4,7 @@ const { Atendimentos, Psicologos, Pacientes } = require("../models");
 
 
 const atendimentosController = {
-    async listarAtendimentos(req, res) {
+    async listAtendimentos(req, res) {
         try {
             const listarAtendimentos = await Atendimentos.findAll();
 
@@ -32,7 +32,7 @@ const atendimentosController = {
             console.log(error);
         }
     },
-    async criarAtendimento(req, res) {
+    async criateAtendimento(req, res) {
         try {
 
             const { data_atendimento, observacao, pacientes_id, psicologos_id } = req.body;

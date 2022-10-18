@@ -1,7 +1,7 @@
 const { Pacientes, Psicologos, Atendimentos } = require("../models");
 
 const dashboardController = {
-    async numeroPacientes(req, res) {
+    async numberPacientes(req, res) {
         try {
             const { count, rows } = await Pacientes.findAndCountAll({             
             offset: 10000,
@@ -15,7 +15,7 @@ const dashboardController = {
         }
     },
 
-    async numeroPsicologos(req, res) {
+    async numberPsicologos(req, res) {
         try {
             const { count, rows } = await Psicologos.findAndCountAll({             
             offset: 10000,
@@ -29,7 +29,7 @@ const dashboardController = {
         }
     },
 
-    async numeroAtendimentos(req, res) {
+    async numberAtendimentos(req, res) {
         try {
             const { count, rows } = await Atendimentos.findAndCountAll({             
             offset: 10000,
@@ -43,7 +43,7 @@ const dashboardController = {
         }
     },
 
-    async mediaAtendimentos(req, res) {
+    async averageAtendimentos(req, res) {
         try {
             const { count, rows } = await Atendimentos.findAndCountAll({             
             offset: 10000,

@@ -15,7 +15,7 @@ const psicologosController = {
         }
      },
 
-     async onePsicologo(req, res) {
+     async byIdPsicologo(req, res) {
         try {
 
             const {id} = req.params;

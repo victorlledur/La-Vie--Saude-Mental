@@ -15,7 +15,7 @@ const pacientesController = {
        }
     },
 
-    async onePaciente(req, res) {
+    async byIdPaciente(req, res) {
        try {
 
            const {id} = req.params;

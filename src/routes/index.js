@@ -14,24 +14,24 @@ const routes = express.Router();
 routes.post("/login", loginValidation, authController.login);
 
 routes.get("/psicologos", psicologosController.listPsicologos);
-routes.get("/psicologo/:id", psicologoByIdValidation, psicologosController.onePsicologo);
+routes.get("/psicologo/:id", psicologoByIdValidation, psicologosController.byIdPsicologo);
 routes.post("/psicologo/criar", psicologoCreateValidation, psicologosController.createPsicologo);
 routes.put("/psicologo/:id", psicologoUpdateValidation, psicologosController.updatePsicologo);
 routes.delete("/psicologo/:id", psicologosController.deletePsicologo);
 
-routes.get("/atendimentos", atendimentosController.listarAtendimentos);
+routes.get("/atendimentos", atendimentosController.listAtendimentos);
 routes.get("/atendimento/:id", atendimentosController.ByIdAtendimentos);
-routes.post("/atendimento/criar",atendimentoCreateValidation, atendimentosController.criarAtendimento);
+routes.post("/atendimento/criar",atendimentoCreateValidation, atendimentosController.criateAtendimento);
 
 routes.get("/pacientes", pacientesController.listPacientes);
-routes.get("/paciente/:id", pacientesController.onePaciente);
+routes.get("/paciente/:id", pacientesController.byIdPaciente);
 routes.post("/paciente/criar", pacientesController.createPaciente);
 routes.put("/paciente/:id", pacientesController.updatePaciente);
 routes.delete("/paciente/:id", pacientesController.deletePaciente);
 
-routes.get("/dashboard/numero-pacientes", dashboardController.numeroPacientes);
-routes.get("/dashboard/numero-atendimentos", dashboardController.numeroAtendimentos);
-routes.get("/dashboard/numero-psicologos", dashboardController.numeroPsicologos);
-routes.get("/dashboard/media-atendimentos", dashboardController.mediaAtendimentos);
+routes.get("/dashboard/numero-pacientes", dashboardController.numberPacientes);
+routes.get("/dashboard/numero-atendimentos", dashboardController.numberAtendimentos);
+routes.get("/dashboard/numero-psicologos", dashboardController.numberPsicologos);
+routes.get("/dashboard/media-atendimentos", dashboardController.averageAtendimentos);
 
 module.exports = routes;
