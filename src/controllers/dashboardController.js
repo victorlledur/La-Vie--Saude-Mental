@@ -45,12 +45,16 @@ const dashboardController = {
 
     async averageAtendimentos(req, res) {
         try {
-            const { count, rows } = await Atendimentos.findAndCountAll({             
-            offset: 10000,
-            limit: 10000
+            const average = await Psicologos.findAll({
+                attributes: ["id",'nome'],
+                include: [
+                    {
+                        model: Atendimentos,
+                        attributes: ['psicologos_id']
+                    }
+                ]                
             });
-
-            res.status(200).json(count);
+            res.json(average)
         }
         catch (error) {
             console.log(error);
