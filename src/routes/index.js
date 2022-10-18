@@ -7,8 +7,9 @@ const psicologoCreateValidation = require("../validations/psicologos/create");
 const psicologoByIdValidation = require("../validations/psicologos/getOne");
 const psicologoUpdateValidation = require("../validations/psicologos/update");
 const authController = require("../controllers/authController");
-const atendimentoCreateValidation = require("../validations/atendimentos/create")
-const dashboardController = require("../controllers/dashboardController")
+const atendimentoCreateValidation = require("../validations/atendimentos/create");
+const dashboardController = require("../controllers/dashboardController");
+const auth = require("../middlewares/auth")
 const routes = express.Router();
 
 routes.post("/login", loginValidation, authController.login);
@@ -21,7 +22,7 @@ routes.delete("/psicologo/:id", psicologosController.deletePsicologo);
 
 routes.get("/atendimentos", atendimentosController.listAtendimentos);
 routes.get("/atendimento/:id", atendimentosController.ByIdAtendimentos);
-routes.post("/atendimento/criar",atendimentoCreateValidation, atendimentosController.criateAtendimento);
+routes.post("/atendimento/criar", auth, atendimentosController.criateAtendimento, atendimentoCreateValidation);
 
 routes.get("/pacientes", pacientesController.listPacientes);
 routes.get("/paciente/:id", pacientesController.byIdPaciente);

@@ -1,5 +1,7 @@
-
 const { Atendimentos, Psicologos, Pacientes } = require("../models");
+const jwt = require("jsonwebtoken");
+const secret = require("../configs/secret");
+const auth = require("../middlewares/auth")
 
 
 
@@ -8,8 +10,7 @@ const atendimentosController = {
         try {
             const listarAtendimentos = await Atendimentos.findAll();
 
-            res.json(listarAtendimentos);
-            res.sendStatus(200);
+            res.status(200).json(listarAtendimentos);
         }
         catch (error) {
             console.log(error);
@@ -26,30 +27,35 @@ const atendimentosController = {
                 res.status(404).json("Id não encontrado")
             };
 
-            res.json(atendimento);
-            res.sendStatus(200);
+            res.status(200).json(atendimento);
+
         } catch (error) {
             console.log(error);
         }
     },
     async criateAtendimento(req, res) {
         try {
+            const pacienteId = Atendimentos.pacientes_id;
+
+            const decoded = req.auth
+
+            const decodedId = decoded.id;
 
             const { data_atendimento, observacao, pacientes_id, psicologos_id } = req.body;
 
-            const newatendimento = await Atendimentos.create(
+            const newAtendimento = await Atendimentos.create(
                 {
                     data_atendimento,
                     observacao,
-                    psicologos_id,
+                    psicologos_id: decodedId,
                     pacientes_id,
-                } 
+                }
             );
-            if (!newatendimento.psicologos_id) {
+            if (!newAtendimento.psicologos_id || newAtendimento.pacientes_id != pacienteId) {
                 res.status(400)
             };
 
-            res.json(newatendimento)
+            res.json(newAtendimento)
         } catch (error) {
             console.log(error)
         }
