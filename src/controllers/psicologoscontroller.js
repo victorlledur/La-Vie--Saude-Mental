@@ -23,15 +23,14 @@ const psicologosController = {
             const psicologo = await Psicologos.findOne({
                 where: {
                     id,
-                }
+                },
+                attributes:["id", "nome", "email", "apresentacao"]
             });
 
 
             if (!psicologo) {
-                res.status(404).json("Id não encontrado")                                
+                return res.status(404).json("Id não encontrado")                                
             };
-
-            psicologo.senha = undefined
 
             res.status(200).json(psicologo)
         } catch (error) {

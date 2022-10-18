@@ -28,7 +28,7 @@ const atendimentosController = {
                 }
             });
             if (!atendimento) {
-                res.status(404).json(ERRORS.ATENDIMENTOS.BYID)
+                return res.status(404).json(ERRORS.ATENDIMENTOS.BYID)
             };
 
             res.status(200).json(atendimento);
@@ -37,7 +37,7 @@ const atendimentosController = {
             console.log(error);
         }
     },
-    async criateAtendimento(req, res) {
+    async createAtendimento(req, res) {
         try {
             const pacienteId = Atendimentos.pacientes_id;
 
