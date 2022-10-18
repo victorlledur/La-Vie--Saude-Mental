@@ -29,5 +29,5 @@ const Atendimentos = db.define(
     timestamps: false,
 
 })
-Atendimentos.removeAttribute('id');
+
 module.exports = Atendimentos;
