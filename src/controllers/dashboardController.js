@@ -1,4 +1,6 @@
 const { Pacientes, Psicologos, Atendimentos } = require("../models");
+const Sequelize = require("sequelize");
+
 
 const dashboardController = {
     async numberPacientes(req, res) {
@@ -46,15 +48,19 @@ const dashboardController = {
     async averageAtendimentos(req, res) {
         try {
             const average = await Psicologos.findAll({
-                attributes: ["id",'nome'],
+                attributes: ['nome'],
                 include: [
                     {
                         model: Atendimentos,
-                        attributes: ['psicologos_id']
+                        attributes: [[Sequelize.fn('count', Sequelize.col('psicologos_id')), 'media de atendimentos']]
                     }
-                ]                
+                ],
+                // raw: true,
+                group: ['psicologos_id']    
             });
+           
             res.json(average)
+            
         }
         catch (error) {
             console.log(error);
