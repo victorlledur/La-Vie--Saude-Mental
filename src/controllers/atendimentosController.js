@@ -60,7 +60,7 @@ const atendimentosController = {
             if (error.name === "SequelizeForeignKeyConstraintError") {
                 res
                 .status(400)
-                .json("Não é possivel criar, há um erro na requisição")
+                .json(ERRORS.ATENDIMENTOS.CREATE)
             }
             console.log(error);            
         }

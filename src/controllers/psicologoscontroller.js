@@ -1,6 +1,6 @@
 const { Psicologos } = require("../models");
 const bcrypt = require("bcryptjs");
-
+const ERRORS = require("../constants/errors");
 
 
 const psicologosController = {
@@ -29,7 +29,7 @@ const psicologosController = {
 
 
             if (!psicologo) {
-                return res.status(404).json("Id não encontrado")                                
+                return res.status(404).json(ERRORS.PSICOLOGOS.ID)                                
             };
 
             res.status(200).json(psicologo)
@@ -84,7 +84,7 @@ const psicologosController = {
             const psicologo = await Psicologos.findByPk(id);
 
             if (!psicologo) {
-                res.status(400).json("Id não encontrado")                                
+                res.status(400).json(ERRORS.PSICOLOGOS.ID)                                
             };
 
             res.json(psicologo)
@@ -104,7 +104,7 @@ const psicologosController = {
             });
 
             if (!psicologo) {
-                res.status(404).json("Id não encontrado")                                
+                res.status(404).json(ERRORS.PSICOLOGOS.ID)                                
             };
 
             await Psicologos.destroy({

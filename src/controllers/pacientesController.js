@@ -1,5 +1,6 @@
 const { Pacientes } = require("../models");
 const bcrypt = require("bcryptjs");
+const ERRORS = require("../constants/errors");
 
 
 
@@ -28,7 +29,7 @@ const pacientesController = {
 
 
            if (!paciente) {
-               res.status(404).json("Id não encontrado")                                
+               res.status(404).json(ERRORS.PACIENTES.ID)                                
            };
 
         res.status(200).json(paciente)
@@ -79,7 +80,7 @@ const pacientesController = {
            const paciente = await Pacientes.findByPk(id);
 
            if (!paciente) {
-            res.status(400).json("Id não encontrado")                                
+            res.status(400).json(ERRORS.PACIENTES.ID)                                
         };
 
            res.status(200).json(paciente)
@@ -99,7 +100,7 @@ const pacientesController = {
            });
 
            if (!paciente) {
-               res.status(404).json("Id não encontrado")                                
+               res.status(404).json(ERRORS.PACIENTES.ID)                                
            };
 
            await Pacientes.destroy({

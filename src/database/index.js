@@ -1,4 +1,6 @@
 const Sequelize = require("sequelize");
+const ERRORS = require("../constants/errors");
+const SUCCESS = require("../constants/succes");
 
 const DB_NAME = "la-vie-saude-mental";
 const DB_USER = "root";
@@ -14,15 +16,15 @@ let db = {};
 try{
     db = new Sequelize(DB_NAME, DB_USER, DB_PASS, DB_CONFIG);
 }catch(error){
-    console.error("Erro ao tentar uma conexao com o banco de dados");
+    console.error(ERRORS.DATABASE.SEQERROR);
 }
 
 async function hasConection(){
     try {
         await db.authenticate();
-        console.log("Banco de dados conectado")
+        console.log(SUCCESS.DATABASE.HASCONECTIONOK)
     } catch (error) {
-        console.error("Erro ao tentar se conectar")
+        console.error(ERRORS.DATABASE.HASCONECTIONERROR)
     }
 }
 
