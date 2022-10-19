@@ -5,7 +5,7 @@ const Sequelize = require("sequelize");
 const dashboardController = {
     async numberPacientes(req, res) {
         try {
-            const { count, rows } = await Pacientes.findAndCountAll({             
+            const { count } = await Pacientes.findAndCountAll({             
             offset: 10000,
             limit: 10000
             });
@@ -19,7 +19,7 @@ const dashboardController = {
 
     async numberPsicologos(req, res) {
         try {
-            const { count, rows } = await Psicologos.findAndCountAll({             
+            const { count } = await Psicologos.findAndCountAll({             
             offset: 10000,
             limit: 10000
             });
@@ -33,7 +33,7 @@ const dashboardController = {
 
     async numberAtendimentos(req, res) {
         try {
-            const { count, rows } = await Atendimentos.findAndCountAll({             
+            const { count } = await Atendimentos.findAndCountAll({             
             offset: 10000,
             limit: 10000
             });
@@ -47,20 +47,36 @@ const dashboardController = {
 
     async averageAtendimentos(req, res) {
         try {
-            const average = await Psicologos.findAll({
-                attributes: ['nome'],
-                include: [
-                    {
-                        model: Atendimentos,
-                        attributes: [[Sequelize.fn('count', Sequelize.col('psicologos_id')), 'media de atendimentos']]
-                    }
-                ],
-                // raw: true,
-                group: ['psicologos_id']    
-            });
+            // const averageGroup = await Psicologos.findAll({
+            //     attributes: ['nome'],
+            //     include: [
+            //         {
+            //             model: Atendimentos,
+            //             attributes: [[Sequelize.fn('count', Sequelize.col('psicologos_id')), 'media de atendimentos']]
+            //         }
+            //     ],
+            //     raw: true,
+            //     group: ['psicologos_id']    
+            // });
            
-            res.json(average)
+            // res.json(averageGroup)
             
+            const { count } = await Psicologos.findAndCountAll({             
+                offset: 10000,
+                limit: 10000
+                });
+                const numPsi = count;
+
+                const countAtend = await Atendimentos.findAndCountAll({             
+                    offset: 10000,
+                    limit: 10000
+                    });
+                    const numAtend = countAtend.count
+
+                    const average = numAtend / numPsi
+
+                    res.json(average);
+
         }
         catch (error) {
             console.log(error);
