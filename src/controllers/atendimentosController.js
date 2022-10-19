@@ -55,13 +55,14 @@ const atendimentosController = {
                     pacientes_id,
                 }
             );
-            if (!newAtendimento.psicologos_id || newAtendimento.pacientes_id != pacienteId) {
-                res.status(400)
-            };
-
             res.json(newAtendimento)
         } catch (error) {
-            console.log(error)
+            if (error.name === "SequelizeForeignKeyConstraintError") {
+                res
+                .status(400)
+                .json("Não é possivel criar, há um erro na requisição")
+            }
+            console.log(error);            
         }
     },
 }
