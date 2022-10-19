@@ -59,7 +59,7 @@ const pacientesController = {
     async updatePaciente(req,res) {
        try {
            const { id } = req.params;
-           const { nome, email, idade } = req.body;           
+           const { nome, email, idade } = req.body;  
 
 
            await Pacientes.update(
@@ -77,6 +77,10 @@ const pacientesController = {
            );
 
            const paciente = await Pacientes.findByPk(id);
+
+           if (!paciente) {
+            res.status(400).json("Id não encontrado")                                
+        };
 
            res.status(200).json(paciente)
        } catch (error) {

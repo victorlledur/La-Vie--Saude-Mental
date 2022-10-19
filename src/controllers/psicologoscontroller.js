@@ -83,6 +83,10 @@ const psicologosController = {
 
             const psicologo = await Psicologos.findByPk(id);
 
+            if (!psicologo) {
+                res.status(400).json("Id não encontrado")                                
+            };
+
             res.json(psicologo)
         } catch (error) {
             

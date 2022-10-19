@@ -18,7 +18,7 @@ const atendimentosController = {
         }
     },
 
-    async ByIdAtendimentos(req, res) {
+    async byIdAtendimentos(req, res) {
         try {
             const { id } = req.params;
 
