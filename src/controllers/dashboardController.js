@@ -46,21 +46,7 @@ const dashboardController = {
     },
 
     async averageAtendimentos(req, res) {
-        try {
-            // const averageGroup = await Psicologos.findAll({
-            //     attributes: ['nome'],
-            //     include: [
-            //         {
-            //             model: Atendimentos,
-            //             attributes: [[Sequelize.fn('count', Sequelize.col('psicologos_id')), 'media de atendimentos']]
-            //         }
-            //     ],
-            //     raw: true,
-            //     group: ['psicologos_id']    
-            // });
-           
-            // res.json(averageGroup)
-            
+        try {            
             const { count } = await Psicologos.findAndCountAll({             
                 offset: 10000,
                 limit: 10000
