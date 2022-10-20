@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 
 
 const dashboardController = {
-    async numberPacientes(req, res) {
+    async numberPacientes(req, res, next) {
         try {
             const { count } = await Pacientes.findAndCountAll({             
             offset: 10000,
@@ -13,11 +13,11 @@ const dashboardController = {
             res.status(200).json(count);
         }
         catch (error) {
-            console.log(error);
+            next(error);
         }
     },
 
-    async numberPsicologos(req, res) {
+    async numberPsicologos(req, res,next) {
         try {
             const { count } = await Psicologos.findAndCountAll({             
             offset: 10000,
@@ -27,11 +27,11 @@ const dashboardController = {
             res.status(200).json(count);
         }
         catch (error) {
-            console.log(error);
+            next(error);
         }
     },
 
-    async numberAtendimentos(req, res) {
+    async numberAtendimentos(req, res, next) {
         try {
             const { count } = await Atendimentos.findAndCountAll({             
             offset: 10000,
@@ -41,11 +41,11 @@ const dashboardController = {
             res.status(200).json(count);
         }
         catch (error) {
-            console.log(error);
+            next(error);
         }
     },
 
-    async averageAtendimentos(req, res) {
+    async averageAtendimentos(req, res, next) {
         try {            
             const { count } = await Psicologos.findAndCountAll({             
                 offset: 10000,
@@ -65,7 +65,7 @@ const dashboardController = {
 
         }
         catch (error) {
-            console.log(error);
+            next(error);
         }
     },
 

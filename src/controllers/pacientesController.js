@@ -5,18 +5,18 @@ const ERRORS = require("../constants/errors");
 
 
 const pacientesController = {
-    async listPacientes(req, res) {
+    async listPacientes(req, res, next) {
        try {
            const listarPacientes = await Pacientes.findAll();
    
            res.status(200).json(listarPacientes);            
        } catch (error) {
-           console.log(error);
+           next(error);
            
        }
     },
 
-    async byIdPaciente(req, res) {
+    async byIdPaciente(req, res, next) {
        try {
 
            const {id} = req.params;
@@ -35,12 +35,12 @@ const pacientesController = {
         res.status(200).json(paciente)
 
        } catch (error) {
-           console.log(error)
+           next(error)
        }              
        
     },
 
-    async createPaciente(req,res) {
+    async createPaciente(req,res, next) {
        try {
            const { nome, email, idade } = req.body;
 
@@ -53,11 +53,11 @@ const pacientesController = {
 
           res.status(201).json(newPaciente)
        } catch (error) { 
-           console.log(error)            
+           next(error)            
        }
     },
 
-    async updatePaciente(req,res) {
+    async updatePaciente(req,res, next) {
        try {
            const { id } = req.params;
            const { nome, email, idade } = req.body;  
@@ -85,11 +85,12 @@ const pacientesController = {
 
            res.status(200).json(paciente)
        } catch (error) {
+        next(error)
            
        }
     },
 
-    async deletePaciente(req,res) {        
+    async deletePaciente(req,res,next) {        
        try {
            const {id} = await req.params;
 
@@ -112,7 +113,7 @@ const pacientesController = {
            res.sendStatus(204)
            
        } catch (error) {
-           console.log(error)          
+           next(error)          
        }
     },
 

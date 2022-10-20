@@ -4,18 +4,18 @@ const ERRORS = require("../constants/errors");
 
 
 const psicologosController = {
-     async listPsicologos(req, res) {
+     async listPsicologos(req, res, next) {
         try {
             const listarPsicologos = await Psicologos.findAll();
     
             res.json(listarPsicologos);            
         } catch (error) {
-            console.log(error);
+            next(error);
             
         }
      },
 
-     async byIdPsicologo(req, res) {
+     async byIdPsicologo(req, res, next) {
         try {
 
             const {id} = req.params;
@@ -34,12 +34,12 @@ const psicologosController = {
 
             res.status(200).json(psicologo)
         } catch (error) {
-            console.log(error)
+            next(error)
         }              
         
      },
 
-     async createPsicologo(req,res) {
+     async createPsicologo(req,res,next) {
         try {
             const { nome, email, senha, apresentacao } = req.body;
 
@@ -55,11 +55,11 @@ const psicologosController = {
 
            res.status(201).json(newPsicologo)
         } catch (error) { 
-            console.log(error)            
+            next(error)            
         }
      },
 
-     async updatePsicologo(req,res) {
+     async updatePsicologo(req,res,next) {
         try {
             const { id } = req.params;
             const { nome, email, senha, apresentação } = req.body;
@@ -89,11 +89,12 @@ const psicologosController = {
 
             res.json(psicologo)
         } catch (error) {
+            next(error)
             
         }
      },
 
-     async deletePsicologo(req,res) {        
+     async deletePsicologo(req,res,next) {        
         try {
             const {id} = await req.params;
 
@@ -117,7 +118,7 @@ const psicologosController = {
             res.sendStatus(204)
             
         } catch (error) {
-            console.log(error)          
+           next(error)          
         }
      },
 

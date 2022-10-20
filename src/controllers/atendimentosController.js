@@ -7,18 +7,18 @@ const ERRORS = require("../constants/errors")
 
 
 const atendimentosController = {
-    async listAtendimentos(req, res) {
+    async listAtendimentos(req, res, next) {
         try {
             const listarAtendimentos = await Atendimentos.findAll();
 
             res.status(200).json(listarAtendimentos);
         }
         catch (error) {
-            console.log(error);
+            next(error);
         }
     },
 
-    async byIdAtendimentos(req, res) {
+    async byIdAtendimentos(req, res, next) {
         try {
             const { id } = req.params;
 
@@ -34,10 +34,10 @@ const atendimentosController = {
             res.status(200).json(atendimento);
 
         } catch (error) {
-            console.log(error);
+            next(error);
         }
     },
-    async createAtendimento(req, res) {
+    async createAtendimento(req, res, next) {
         try {
             const pacienteId = Atendimentos.pacientes_id;
 
@@ -62,7 +62,7 @@ const atendimentosController = {
                 .status(400)
                 .json(ERRORS.ATENDIMENTOS.CREATE)
             }
-            console.log(error);            
+            next(error);            
         }
     },
 }

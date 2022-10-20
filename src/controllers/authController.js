@@ -5,8 +5,9 @@ const secret = require("../configs/secret");
 const ERRORS = require("../constants/errors")
 
 const AuthController = {
-    async login(req, res) {
-        const { email, senha } = req.body;
+    async login(req, res, next) {
+        try {
+            const { email, senha } = req.body;
 
         const psicologo = await Psicologos.findOne({
             where: {
@@ -28,6 +29,12 @@ const AuthController = {
         );
 
         return res.status(200).json(token);
+            
+        } catch (error) {
+            next(error)
+            
+        }
+        
     },
 }
 
