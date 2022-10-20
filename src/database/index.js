@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const ERRORS = require("../constants/errors");
 const SUCCESS = require("../constants/succes");
 
-const DB_NAME = "la-vie-saude-mental";
+const DB_NAME = "la_vie_saude_mental";
 const DB_USER = "root";
 const DB_PASS = "";
 const DB_CONFIG = {
